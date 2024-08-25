@@ -63,7 +63,7 @@ def create_video_grid_with_audio(video_files, output_file):
         '-map', '[mixed_audio]',  # Map the mixed audio
         '-c:v', 'h264_nvenc',  # Use H.264 codec for output
         '-preset', 'fast',
-        '-crf', '18',  # Quality parameter (lower is better quality)
+        '-crf', '12',  # Quality parameter (lower is better quality)
         '-c:a', 'aac',  # Use AAC codec for audio
         '-b:a', '192k',  # Audio bitrate
         output_file
