@@ -1,6 +1,7 @@
 import os
 import subprocess
 from math import ceil, sqrt
+from sys import argv
 
 width = 320
 height = 240
@@ -40,7 +41,7 @@ def create_video_grid_with_audio(video_files, output_file):
     filter_complex += f"{''.join(f'[v{i}]' for i in range(num_videos))}xstack=inputs={num_videos}:layout={layout}[xstack]; "
     
     # Build the audio filter complex command to mix the audio streams
-    audio_filter_complex = f"{''.join(f'[{i}:a]' for i in range(num_videos))}amix=inputs={num_videos}[mixed_audio]"
+    audio_filter_complex = f"{''.join(f'[{i}:a]' for i in range(num_videos))}amix=inputs={num_videos}:normalize=0[mixed_audio]"
     
     # Final filter complex string
     filter_complex += audio_filter_complex
@@ -77,10 +78,10 @@ def create_video_grid_with_audio(video_files, output_file):
 
 if __name__ == "__main__":
     # Directory where the subdirectories with videos are located
-    directory = r"X:\TV Shows\Psych"
+    directory = argv[1]
     
     # Output video file
-    output_file = "no.mp4"
+    output_file = argv[2]
     
     # Find all video files in the directory and its subdirectories
     video_files = find_video_files(directory)
