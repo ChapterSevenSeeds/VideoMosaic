@@ -4,7 +4,7 @@ from math import ceil, sqrt
 from sys import argv
 
 width = 320
-height = 240
+height = 180
 
 def find_video_files(directory):
     video_files = []
