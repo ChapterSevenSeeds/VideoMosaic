@@ -10,7 +10,7 @@ def find_video_files(directory):
     video_files = []
     for root, _, files in os.walk(directory):
         for file in files:
-            if file.endswith(('.mp4', '.mov', '.avi', '.mkv', '.flv')):
+            if file.endswith(('.mp4', '.mov', '.avi', '.mkv', '.flv', '.webm', '.v')):
                 video_files.append(os.path.join(root, file))
     return video_files
 
@@ -70,6 +70,7 @@ def create_video_grid_with_audio(video_files, output_file):
     ])
     
     # Run the command
+    print(" ".join(command))
     try:
         subprocess.run(command, check=True)
         print(f"Output video saved as {output_file}")
