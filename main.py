@@ -26,7 +26,7 @@ def create_video_grid_with_audio(video_files, output_file):
     # Prepare the ffmpeg filter for tiling the videos and mixing the audio
     filter_complex = ""
     for i in range(num_videos):
-        filter_complex += f"[{i}:v]scale={width}:{height}:force_original_aspect_ratio=decrease,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2[v{i}]; "  # Rescale each video to 320x240 for uniformity
+        filter_complex += f"[{i}:v]scale={width}:{height}:force_original_aspect_ratio=decrease,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2[v{i}]; "
     
     # Create layout configuration for xstack
     layout = ""
