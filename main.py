@@ -54,7 +54,7 @@ def create_video_grid_with_audio(video_files, output_file):
     
     # Add all input files
     for video in video_files:
-        command.extend(['-i', video])
+        command.extend(['-i', video.lstrip(".\\")])
     
     # Add the filter complex command
     command.extend([
