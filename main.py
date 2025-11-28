@@ -4,17 +4,15 @@ import json
 from math import ceil, sqrt
 from sys import argv
 
-width = 320
-height = 180
+width = 182
+height = 134
 
 def find_video_files(directory):
     video_files = []
     for root, _, files in os.walk(directory):
         for file in files:
-            # if file.endswith(('.mp4', '.mov', '.avi', '.mkv', '.flv', '.webm', '.v')):
-            if file.endswith(".json"):
-                continue
-            video_files.append(os.path.join(root, file))
+            if file.endswith(('.mp4', '.mov', '.avi', '.mkv', '.flv', '.webm', '.v')):
+                video_files.append(os.path.join(root, file))
     return sorted(video_files)
 
 def create_video_grid_with_audio(video_files, output_file, offsets=None, gains=None, global_offset=0):
@@ -66,7 +64,7 @@ def create_video_grid_with_audio(video_files, output_file, offsets=None, gains=N
         if final_offset_ms is not None and final_offset_ms != 0:
             # Apply offset using setpts filter for video and audio
             offset_seconds = final_offset_ms / 1000.0
-            filter_complex += f"[{i}:v]setpts=PTS+{offset_seconds}/TB,{scale_filter}[v{i}];"
+            filter_complex += f"[{i}:v]tpad=start_duration={offset_seconds}:start_mode=add:color=black,fifo,setpts=PTS-STARTPTS,{scale_filter}[v{i}];"
             
             # Apply gain and delay to audio
             if specific_gain_db is not None and specific_gain_db != 0:
