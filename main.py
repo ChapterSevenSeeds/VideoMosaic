@@ -4,8 +4,8 @@ import json
 from math import ceil, sqrt
 from sys import argv
 
-width = 182
-height = 134
+width = 320
+height = 180
 
 def find_video_files(directory):
     video_files = []
@@ -103,7 +103,7 @@ def create_video_grid_with_audio(video_files, output_file, offsets=None, gains=N
     
     # Add all input files
     for video in video_files:
-        command.extend(['-i', video.lstrip(".\\")])
+        command.extend(['-i', video]) 
     
     # Add the filter complex command
     command.extend([
@@ -121,6 +121,7 @@ def create_video_grid_with_audio(video_files, output_file, offsets=None, gains=N
         '-b:a', '192k',  # Audio bitrate
         '-ar', '48000',  # Audio sample rate for consistency
         '-avoid_negative_ts', 'make_zero',  # Handle negative timestamps better
+        # '-t', '00:00:30',
         output_file
     ])
     
